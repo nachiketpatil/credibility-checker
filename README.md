@@ -1,10 +1,9 @@
 # credibility-checker
+**Author**: Nachiket Patil
 In this project some ML models are trained to figure out what is the best model to verify credibility (classify true of fake) news articles
 
 ## Overview: 
 In this practical application, we answer the question 'What is the most effective model for determining whether a news article is real or fake?'
-
-Following CRISP-DM method.
 
 ## Motivation:
 NEWS has always been a critical source of truth and information of world events that affect everybody. In an era of widespread misinformation, distinguishing real news from fake is critical to maintaining an informed public. This project is an initial foray into classifying information vs disinformation by applying machine learning to classify news credibility, offering practical insights into automated fact-checking.
@@ -132,3 +131,11 @@ The Naive Bayes model results are:
 <img width="640" height="480" alt="naive_bayes_confusion_matrix" src="https://github.com/user-attachments/assets/6fb57d6b-9fa3-48f0-a0a5-5d74db25b94a" />
 
 
+| Contact Information | |
+|-------|---------|
+| **Name** | Nachiket Patil |
+| **Email** | <hi.nachiket.patil@gmail.com> |
+| **GitHub** | [https://github.com/nachiketpatil) |
+| **LinkedIn** | [https://www.linkedin.com/in/nachikethiralalpatil/) |
+| **Project Repository** | [https://github.com/nachiketpatil/credibility-checker.git) |
+| **Primary Data Source** | [https://www.kaggle.com/datasets/clmentbisaillon/fake-and-real-news-dataset/data) |
