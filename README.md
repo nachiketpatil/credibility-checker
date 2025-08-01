@@ -132,6 +132,12 @@ The Naive Bayes model results are:
 <img width="640" height="480" alt="naive_bayes_confusion_matrix" src="https://github.com/user-attachments/assets/6fb57d6b-9fa3-48f0-a0a5-5d74db25b94a" />
 
 
+### Next steps:
+* Select the models that can be trained with the text dataset and optimize them.
+* If possible run a ensemble and try to improvize the results.
+* Run a Newral network and see if the results improve for given dataset.
+
+
 | Contact Information | |
 |-------|---------|
 | **Name** | Nachiket Patil |
