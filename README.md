@@ -107,10 +107,28 @@ Following are the word cloud images of the articles after preprocessing. These s
 
 
 ### Data Preparation:
+For Natural Language Processing, the input data is language text. This data needs to be processed and converted into numerial data (vectorized input) that the models understand. Following are the steps for this process:
+1. Data Collection: We have 2 separate files (real.csv and fake.csv). The contents are concatenated and shuffled to randomize the data. Then any null values and duplicates are dropped. There are no null values and no duplicate rows.
+2. Text Cleaning / Preprocessing: The text column that contains main news articles is then Converted to lowercase -> Punctuations removed -> Stopwords removed (e.g., "the", "and") -> Special characters, numbers are removed -> Tokenized into separate words
+3. Text Normalization: All tokenized words are then reduced to their base dictionary form (lemma) with Lemmatization. This way we have same wordswithout tense or degree. (e.g. "playing" -> "play", "luckiest" -> "lucky")
+4. Vectorization: The cleaned and tokenized text is then converted into numerical format TF-IDF (Term Frequency–Inverse Document Frequency). TF-IDF assigns unique numerical value for each word based on its frequency across documents.
+5. Split: Split the data into train set and test set. 80% of the rows are set for train set and remaining 20% are test set.
+
+   Now the data is ready for training the models.
 
 
-### Baseline Models comparison:
-For model comparison, we used the following classification models:
-- Logistic Regression
-- Support Vector Model
+### Baseline Model:
+To establish the baseline performance an daccuracy metrics for the text data, we need to run a simple and quick model. For NLP, to classify the text into binary values (real vs fake), most common baseline model is Naive Bayes Model. 
+The Naive Bayes model is a simple but powerful probabilistic machine learning algorithm used for classification tasks—especially in text classification like spam detection, sentiment analysis, and fake news detection. It is based on Bayes’ Theorem, which describes the probability of a class given some evidence (features), assuming feature independence. It naively assumes that all features (words, in text) are independent of each other, which is rarely true in real-world data—but this assumption makes the model simple and fast.
+
+The Naive Bayes model results are:
+runtime: 2.65 seconds
+accuracy: 0.9288351795904666
+precision: 0.93
+f1-score: 0.93
+recall: 0.93
+
+Confusion Matrix: 
+<img width="640" height="480" alt="naive_bayes_confusion_matrix" src="https://github.com/user-attachments/assets/6fb57d6b-9fa3-48f0-a0a5-5d74db25b94a" />
+
 
