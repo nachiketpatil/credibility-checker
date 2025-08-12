@@ -19,7 +19,9 @@ The goal of this exercise is to evaluate performance and accuracy of different m
 The dataset contains 2 separate CSV files one for real and one for fake news articles. The news articles are collected between years 2016 and 2017.
 Both sheets contain 4 columns: Title, Text, Subject and Date.
 
-The dataset is in the `/data` subfolder, file names `real.csv` and `fake.csv`.
+The dataset is to be located in the `/data` subfolder, file names `real.csv` and `fake.csv`. But the dataset is too large (>100MB) for github so it is not included in the Github repository.
+
+At the end I have also added a manual test dataset with 5 fake and 5 real articles with strategically placed cues. It is present in `/data` directory too.
 
 ## Dependencies
 This project requires the following Python libraries:
@@ -43,10 +45,14 @@ Local setup:
 ## Repository Structure
 ```
 ├── data/                          # Directory for dataset
-│   ├── real.csv                   # Dataset of real news articles
-│   └── fake.csv                   # Dataset of fake news articles
+│   ├── real.csv                   # Dataset of real news articles - Not in Github repository (file too large)
+│   ├── fake.csv                   # Dataset of fake news articles - Not in Github repository (file too large)
+│   ├── X_train_bert.npy           # BERT embeddings for the train split of the data - Not in Github repository (file too large)
+│   ├── X_test_bert.npy            # BERT embeddings for the test split of the data - Not in Github repository (file too large)
+│   └── manual_test.csv            # Additional dataset for manual test
 ├── images/                        # Directory for storing visualization images
 ├── credibility-checker.ipynb      # Jupyter Notebook for all code to train models
+├── requirement.txt               # Python dependencies to be installed to run the project
 └── README.md                      # Project documentation and analysis results
 ```
 
@@ -55,13 +61,15 @@ Local setup:
     - Open terminal and run:
       `git clone https://github.com/nachiketpatil/credibility-checker.git`
 2. Install dependencies:
-   `pip install matplotlib seaborn pandas numpy nltk wordcloud tensorflow`
+   `pip install -r requirement.txt`
 3. Open the Jupyter Notebook:
    `jupyter notebook coupon_data_analysis.ipynb`
    Run the cells to explore the analysis.
 
 ## License
 This project is public (Unlicense). Feel free to download and use the code for your own analysis.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Exploratory Data Analysis
 The dataset contains 2 files in comma separated values (csv) format. One for real news and one for fake news.
@@ -443,4 +451,6 @@ Use article source credibility, publication date, author history, and even assoc
 
 
 
+UC Berkeley Professional Certificate in Machine Learning and Artificial Intelligence
+Capstone Project - 2025
 
