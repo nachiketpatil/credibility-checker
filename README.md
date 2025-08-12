@@ -125,13 +125,14 @@ For Natural Language Processing, the input data is language text. This data need
 
 ### Vectorization:
 ML models (like logistic regression, SVMs, neural networks) work with numbers, not raw text or other unstructured formats. Vectorization is the process of converting non-numerical data into a numerical vector representation that algorithms can process.
+
 We are dealing with text data, there are multiple ways to vectorize the text data. The most common methods are:
-TF-IDF: TF-IDF (Term Frequency–Inverse Document Frequency) is a technique that reflects how important a word is to a document in a collection. The numerical value for a word increases with the number of times a word appears in a document (term frequency) but is offset by how common the word is across all documents (inverse document frequency).
-BERT: BERT vectorization uses a pre-trained deep learning model (BERT: Bidirectional Encoder Representations from Transformers) to convert text into dense numerical embeddings that capture contextual meaning. Unlike traditional methods, BERT considers the entire sentence and the position of words to generate rich, semantic representations.
+* TF-IDF: TF-IDF (Term Frequency–Inverse Document Frequency) is a technique that reflects how important a word is to a document in a collection. The numerical value for a word increases with the number of times a word appears in a document (term frequency) but is offset by how common the word is across all documents (inverse document frequency).
+* BERT: BERT vectorization uses a pre-trained deep learning model (BERT: Bidirectional Encoder Representations from Transformers) to convert text into dense numerical embeddings that capture contextual meaning. Unlike traditional methods, BERT considers the entire sentence and the position of words to generate rich, semantic representations.
 
 For this project, we will use both TF-IDF and BERT vectorization methods to compare the performance of different models.
-TF-IDF vectorization is faster and simpler, while BERT vectorization captures needs loading a torch model and tune it for the dataset. 
-BERT is far more compute intensive with vectorization time ~3 hours. So In the project, the word embeddings, output of BERT vectorization, is saved in `/data` directory and is loaded for subsequent runs.
+* TF-IDF vectorization is faster and simpler, while BERT vectorization captures needs loading a torch model and tune it for the dataset. 
+* BERT is far more compute intensive with vectorization time ~3 hours. So In the project, the word embeddings, output of BERT vectorization, is saved in `/data` directory and is loaded for subsequent runs.
 
 
 ### Baseline Model:
