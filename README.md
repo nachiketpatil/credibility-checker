@@ -353,11 +353,83 @@ Lets run the manual testing dataset of real nad fake news articles through these
 * The real articles have most of the telltale signs of the news articles (e.g. real sources like Reuter / NPR, professional language and phrases.)
 * The Fake articles also have the telltale signs like no soure included, unprofessional language like extreme exclamations and publicly available image sources.
 
-  
+
+Following is the accuracy chart for all previous models on the manual testing data:
+| Model              | Test Accuracy | Recall Score | F1 Score  | False Positives | False Negatives |
+|--------------------|---------------|--------------|-----------|-----------------|-----------------|
+| LogisticRegression | 0.70          | 0.40         | 0.571429  | 0               | 3               |
+| DecisionTree       | 0.70          | 0.40         | 0.571429  | 0               | 3               |
+| KNN                | 0.40          | 0.00         | 0.000000  | 1               | 5               |
+| SVM                | 0.70          | 0.60         | 0.666667  | 1               | 2               |
+| RandomForest       | 0.70          | 0.40         | 0.571429  | 0               | 3               |
+| CNN                | 0.70          | 0.40         | 0.571429  | 0               | 3               |
+| LSTM               | 0.80          | 0.60         | 0.750000  | 0               | 2               |
 
 
 
+<p align="center">
+  <img alt="manual_test_LogisticRegression_confustion_matrix" src="https://github.com/user-attachments/assets/0d548b57-2148-4bc4-b05d-e84fe8b799ee" width="45%"/>
+  <img alt="manual_test_DecisionTree_confustion_matrix" src="https://github.com/user-attachments/assets/38f3ef2b-fd64-4100-b9a1-36e1bbbc134c" width="45%"/>
+</p>
 
+<p align="center">
+  <img alt="manual_test_K-Nearest Neighbors_confustion_matrix" src="https://github.com/user-attachments/assets/dccbf185-1ca4-4521-a345-6764f08665bb" width="45%" />
+  <img alt="manual_test_Support Vector Machine_confustion_matrix" src="https://github.com/user-attachments/assets/000dab77-a21f-4238-82c2-cc2c0529bf09" width="45%" />
+</p>
+
+<img alt="manual_test_Random Forest Machine_confustion_matrix" src="https://github.com/user-attachments/assets/0ef31112-e18f-4776-bf0c-d4e2fc65a81f" />
+
+<p align="center">
+  <img alt="manual_test_Convolutional Neural Network_confustion_matrix" src="https://github.com/user-attachments/assets/c8e8a97d-6771-4a6a-91dc-30e4565efe60" width="45%" />
+  <img alt="manual_test_Long- Short Term Memory (RNN)_confustion_matrix" src="https://github.com/user-attachments/assets/d27ff93a-1eb4-4705-b4bd-1f7ee98c1d42" width="45%" />
+</p>
+
+
+#### Observations:
+For the manual testing of the random 10 articles with 5 real and 5 fake, most of the models classified the articles along the lines of the previous results of test accuracies on the large real - fake news dataset.
+* K-Nearest neighbors model performed the worst with lowest accuracy, recall and F1 scores and highest false negatives. 
+* SVM also predicted one false positive and 2 false Negatives with low accuracy, recall and F1 scores.
+* For the manual testing dataset, Logistic Regression, Decision Trees and Random forst behaved same with same accuracy, recall, f1 scores and no false positives but 3 false negatives.
+* CNN also predicted no false positive but found 3 dalse Negatives. Some of the phrases or words placed in the text were far apart which indicate the article to be true. CNN Missed them for 3 articles
+* LSTM found the far placed text or rather absense of the phrases in articles at least once more. It performed the best for manual test dataset Indicating it can carry some context throughout the article.
+* Most of the clear indicators of the new article being fake (e.g. no soure included, unprofessional language like extreme exclamations and publicly available image sources) were caught by almost all models.
+
+
+### Final Model comparison and Overall conclusion:
+After extensive testing — from baseline Naive Bayes to tuned Random Forest, SVM, and deep learning models (CNN and LSTM) — several trends were observed:
+
+For the dataset with larger text to be classified (1. real - fake news dataset and 2. manual testing dataset):
+* Deep learning models like Convoluted Neural Networks and Recursive Neural Network like LSTM worked best with extremely high accuracy (≥99.5%) and CNN taking significantly shorter duration to train. At the same time LSTM detected contextually distant cues better than CNN on the manual testing dataset.
+* Tuned Random Forest and Decision Tree also performed near-perfect (≈99.4–99.5% accuracy), with strong recall and F1 scores. These Tree-based models are quite fast to train but, show reduced performance outside the training distribution.
+* Logistic Regression was the fastest traditional ML model with accuracy close to 98.5%.
+* KNN consistently underperformed due to high-dimensionality issues with TF-IDF and poor generalization.
+* SVM performed admirably similar to Logistic Regression and Decision Tree models but was excruciatingly slow to train again because of high-dimentionaliity of the data.
+
+* There are other transformer models, like BERT, available to be run on the news dataset but are quite difficult to train and tuning them is out of scope of this project.
+
+
+### Business Recommendations:
+For large text articles classification:
+* For best contextual accuracy and for nuanced and long-form news, LSTM is preferred, as it retains and uses long-range dependencies in text.
+* If speed and scalability are the primary concern, CNN is the most practical choice, delivering near-LSTM accuracy with much lower training time.
+* For a lightweight baseline, Logistic Regression with TF-IDF offers a fast, resource-efficient option with competitive performance.
+* Avoid KNN and SVM for any Natural Language Processing as they do not handle high dimentionality of the large articles.
+
+* While LSTM works best for larger texts, CNN might performa best for shorter text articles like shorter social media posts and non-binary classifications like sentimental analysis.
+
+
+### Future work:
+**Advanced models:**
+In this project, we trained from baseline model (Naive Bayes), Simple Classification models (Logistic Regression, Decision Trees, K-Nearest Neighbors, Support Vector Machine), Ensemble model (Random Forest) and couple of simple Neural Network models (Convolutional Neural Network, Recursive Neural Network with Long-Short Term Memory model). 
+
+There are several advanced models like Bi-directional LSTM, complex RNNs and Transformer-based models (BERT, RoBERTa, or DistilBERT).
+
+**Fine-tune the advanced models**
+Pre-trained BERT was used for text vectorization but fine tuning it was out of scope for this project.
+Fine-tuning these advanced models on this dataset could bridge the contextual gap and improve performance on subtle or adversarial fake news examples.
+
+**Incorporate metadata and multimodal signals**
+Use article source credibility, publication date, author history, and even associated images for richer classification.
 
 
 | Contact Information | |
