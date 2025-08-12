@@ -361,7 +361,7 @@ From the exercise of training multiple models and observing their pros and cons,
 Lets run the manual testing dataset of real nad fake news articles through these models and observe their classification.
 
 * This manual_test dataset has 10 articles.
-* 5 real like (based on real news but not real) and 5 fake articles.
+* 5 real like (based on real news but not real) and 5 fake articles from fantasy worlds.
 * The real articles have most of the telltale signs of the news articles (e.g. real sources like Reuter / NPR, professional language and phrases.)
 * The Fake articles also have the telltale signs like no soure included, unprofessional language like extreme exclamations and publicly available image sources.
 
