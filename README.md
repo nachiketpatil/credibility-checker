@@ -228,14 +228,14 @@ The much lower accuracies (~50%) with BERT embeddings compared to TF-IDF (~97% -
 ### Tuning the Simple ML models with GridSearch CV to find best hyperparameters: 
 In line with our goal to find the best model that classifies the text articles as real or fake, let us improve on the simple models by tuning the Hyperparameters with GridSearchCV:
 
-Following are the performance metrics for running GridSearch Cross Validation to tune the models: ***<<<Update>>>***
-| Model              | Train Time (s) | Test Accuracy | Train Accuracy | Recall Score | Best Score |
-|--------------------|----------------|---------------|----------------|--------------|------------|
-| LogisticRegression | 11.6489        | 0.9849        | 1.0000         | 0.9868       | 0.9854     |
-| DecisionTree       | 29.0133        | 0.9941        | 0.9968         | 0.9978       | 0.9950     |
-| KNN                | 254.9873       | 0.6694        | 1.0000         | 0.3290       | 0.6542     |
-| SVM                | 10882.7343     | 0.9739        | 0.9999         | 0.9692       | 0.9657     |
-| RandomForest       | 129.3957       | 0.9957        | 1.0000         | 0.9986       | 0.9948     |
+Following are the performance metrics for running GridSearch Cross Validation to tune the models:
+| Model              | Train Time (s) | Test Accuracy | Train Accuracy | Recall Score | F1 Score |
+|--------------------|----------------|---------------|----------------|--------------|----------|
+| LogisticRegression | 11.5885        | 0.9849        | 1.0000         | 0.9868       | 0.9838   |
+| DecisionTree       | 28.9275        | 0.9941        | 0.9968         | 0.9978       | 0.9936   |
+| KNN                | 317.5199       | 0.6694        | 1.0000         | 0.3290       | 0.4804   |
+| SVM                | 10912.0330     | 0.9739        | 0.9999         | 0.9692       | 0.9719   |
+| RandomForest       | 129.2147       | 0.9957        | 1.0000         | 0.9986       | 0.9954   |
 
 Compared to running standalone models, we see minor improvements in the accuracy andrecall for all the models after Hyperparameter tuning.
 
@@ -269,8 +269,9 @@ On top of performance metrics and confusion matrix showing hits and misses, best
 1. Feature importance for top 50 features for Random forest model:
    <img width="1200" height="600" alt="random_forest_tuned_feature_influence" src="https://github.com/user-attachments/assets/2054b846-2add-4152-86be-60f18fe19a53" />
 
-2. Feature importance for top 50 features for Decision Tree model: ***<<<Update>>>***
-   <img width="1200" height="600" alt="decision_tree_tuned_feature_influence" src="https://github.com/user-attachments/assets/a643da89-861d-4259-bf57-94e1997ab27d" />
+2. Feature importance for top 50 features for Decision Tree model:
+   <img width="1200" height="600" alt="decision_tree_tuned_feature_influence" src="https://github.com/user-attachments/assets/3b602e0a-5052-4b1d-a02d-1d8d32ac24f5" />
+
 
 3. Feature importance for top 50 features for Logistic Regression model:
    <img width="1200" height="600" alt="logistic_regression_tuned_feature_influence" src="https://github.com/user-attachments/assets/d59744f8-6844-453b-bdcd-7626ddd8282e" />
@@ -301,7 +302,16 @@ Following is the model training history and confusion matrix of the CNN: ***<<<U
 Here we ran the CNN for 10 epochs same for following RNN. We can observe that the train and test accuracies converge at **epoch 2**. After that the accuracy gain or reduction in loss is not significant.
 Also from the coinfusion matrix, we can observe that the false negatives and false positives are significantly reduced compared to the simple ML models like Random Forest classifier or decision tree model.
 
-**Drawbacks?**
+**Shortcomings?**
+Although CNNs are fash to train and very good at local pattern detection (key phrases, sentiment indicators), they have some shortcomings.
+* As CNNs run with fixed small kernel size, which is the sliding window of consecutive words, they only see local context within the kernel size (e.g., 3–5 words at a time)
+* In the model, max pooling layer loses exact positional information as the sliding window boundary is crossed or the words are too far apart for the Dense layer to establish the relationship — model knows what pattern exists, but not where or in what sequence.
+* Normally CNNs are good at handling fixed context length tasks.
+
+There are other advanced models that overcome these shortcomings.
+* Recursive Neural Network models like LSTM can process sequences word by word, carrying hidden states forward, so they can theoretically remember important information from far earlier in the text.
+* LSTM processes sequentially, inherently preserving order and temporal structure, which is critical for grammar, meaning, and sentiment flow.
+* LSTM is not bound by contexct length. The layers carry over the context so it is good at processing whole articles
 
 
 #### Recursive Neural Netweork - Long-Short Term Memory Model:
@@ -326,9 +336,24 @@ Following is the model training history and confusion matrix of the LSTM: ***<<<
 | LSTM  | 798.92         | 0.995077      | 0.998573       | 0.992775     | 0.994691 |
 
 
+* Both models achieved extremely high accuracy — CNN at 99.85% and LSTM at 99.51% on the test set.
+* Training accuracy is near perfect for both (above 99.85%), showing they fit the training data very well.
+* Recall and F1-scores are also exceptionally high for both models, indicating strong and balanced performance.
+* CNN trained much faster (~125 seconds) compared to LSTM (~799 seconds), making it more computationally efficient for similar accuracy.
+* Overall, CNN offers comparable performance to LSTM but with significantly lower training time, making it the more efficient choice for this task.
 
 
+### Manual Testing:
+From the exercise of training multiple models and observing their pros and cons, I have crafted some articles that exploit these pros and cons of these various models.
 
+Lets run the manual testing dataset of real nad fake news articles through these models and observe their classification.
+
+* This manual_test dataset has 10 articles.
+* 5 real like (based on real news but not real) and 5 fake articles.
+* The real articles have most of the telltale signs of the news articles (e.g. real sources like Reuter / NPR, professional language and phrases.)
+* The Fake articles also have the telltale signs like no soure included, unprofessional language like extreme exclamations and publicly available image sources.
+
+  
 
 
 
