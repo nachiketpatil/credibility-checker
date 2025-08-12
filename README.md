@@ -225,10 +225,10 @@ The much lower accuracies (~50%) with BERT embeddings compared to TF-IDF (~97% -
 
 
 
-### Tuning the Simple ML models with GridSearch CV to find best hyperparameters:
+### Tuning the Simple ML models with GridSearch CV to find best hyperparameters: 
 In line with our goal to find the best model that classifies the text articles as real or fake, let us improve on the simple models by tuning the Hyperparameters with GridSearchCV:
 
-Following are the performance metrics for running GridSearch Cross Validation to tune the models:
+Following are the performance metrics for running GridSearch Cross Validation to tune the models: ***<<<Update>>>***
 | Model              | Train Time (s) | Test Accuracy | Train Accuracy | Recall Score | Best Score |
 |--------------------|----------------|---------------|----------------|--------------|------------|
 | LogisticRegression | 11.6489        | 0.9849        | 1.0000         | 0.9868       | 0.9854     |
@@ -254,12 +254,77 @@ Compared to running standalone models, we see minor improvements in the accuracy
 
 
 #### Confusion Matrices and ROC plots for tuned best models:
-1.Confusion Matrix and ROC plot for tuned Random Forest model:
+1. Confusion Matrix and ROC plot for tuned Random Forest model:
   <img width="1200" height="600" alt="Random Forest Classification Model with Tuned Hyperparameters_conf_matrix_roc_plot" src="https://github.com/user-attachments/assets/ac529c36-48de-4916-a73f-a77cf8c7902d" />
 
 
 2. Confusion Matrix and ROC plot for Decision Tree model:
    <img width="1200" height="600" alt="Decision Tree Model with Tuned Hyperparameters_conf_matrix_roc_plot" src="https://github.com/user-attachments/assets/e4cf6630-a3b6-4690-8c06-0435f9302b26" />
+
+
+
+### Plotting the feature importance of the best models:
+On top of performance metrics and confusion matrix showing hits and misses, best way to visualize what affects the real or fake decision is plotting the features that affect the classification decision most. Here our features are words in the news article text. Following are the feature importance plots for some of the most accurate simple models we have tested:
+
+1. Feature importance for top 50 features for Random forest model:
+   <img width="1200" height="600" alt="random_forest_tuned_feature_influence" src="https://github.com/user-attachments/assets/2054b846-2add-4152-86be-60f18fe19a53" />
+
+2. Feature importance for top 50 features for Decision Tree model: ***<<<Update>>>***
+   <img width="1200" height="600" alt="decision_tree_tuned_feature_influence" src="https://github.com/user-attachments/assets/a643da89-861d-4259-bf57-94e1997ab27d" />
+
+3. Feature importance for top 50 features for Logistic Regression model:
+   <img width="1200" height="600" alt="logistic_regression_tuned_feature_influence" src="https://github.com/user-attachments/assets/d59744f8-6844-453b-bdcd-7626ddd8282e" />
+
+
+### Observations, Limitations and Solutions:
+**Observation:** Based on fearure importance charts above, we can see that the classification decistion is influenced by inividual word tokens. For any given context, these models perform really well like news articles with majority of news along the subjects of politics and world events i.e. these models are overfit on the fake-real-news dataset. But if these models are trained with fictional or fantasy novels, the results will vary wildly for real news. We will test this scenario later.
+
+**Limitation:** In real languages, words individually do not affect the truth or fakeness of the articles. The words used in context with some combination of other words - sentenses, semantics matter. Above traditional simple models although perform well in any given scenario, they have severe limitations in case of Natural Language processing. In short these traditional ML models with TF-IDF rely on sparse, handcrafted features that ignore word order, syntax, and contextual meaning. They struggle with capturing semantic relationships and contextual meaning. 
+
+**Solutions:** Deep learning methods such as Convolutional Neural Networks (CNN),  Recursive neural network (Long-Short Term Memory - LSTM) and Transformers based model (Bidirectional Encoder Representations from Transformers - BERT) overcome the limitations of traditional ML models by learning dense, context-aware representations directly from raw text.
+
+### Training and evaluating Newral networks on the real - fake news dataset:
+
+#### Convolutional Neural Network (CNN):
+* CNN work on the data in multiple layers of filters where each layer converts the data into the classification decision step by step.
+* Raw text is tokenized into integers optionally and then in embedding layer it is mapped to dense vectors.
+* Then most important is convolutional layer where filters slide over word sequence windows of fixed length (kernel size). This makes sure the words are taken in context of nearby words as context. We are using **kernel size of 5**.
+* The Dense Layer takes the output of previous layers and introduces non-lineaity with ReLU (Rectified Linear Unit) activation so the network can learn complex relationships.
+* Last layer is Sigmoid activation for binary classification → probability that text is real/fake.
+
+
+Following is the model training history and confusion matrix of the CNN: ***<<<Update>>>***
+<img width="1200" height="500" alt="CNN_history_accuracy_loss" src="https://github.com/user-attachments/assets/0ff4e4ed-c9da-4a97-927a-837cdd7cc747" />
+
+<img width="600" height="500" alt="CNN_confustion_matrix" src="https://github.com/user-attachments/assets/a7fec6a9-444a-4b23-a1cf-76ce7c108492" />
+
+Here we ran the CNN for 10 epochs same for following RNN. We can observe that the train and test accuracies converge at **epoch 2**. After that the accuracy gain or reduction in loss is not significant.
+Also from the coinfusion matrix, we can observe that the false negatives and false positives are significantly reduced compared to the simple ML models like Random Forest classifier or decision tree model.
+
+**Drawbacks?**
+
+
+#### Recursive Neural Netweork - Long-Short Term Memory Model:
+Long-Short Term Memory (LSTM) model was selected for this news articles dataset classification as it is one of the best and simple newral network models available.
+LSTM is one of the Recusrsive neural network models where the accuracy is improved and loss is reduces for each run of the model as the LSTM layer learns the word patterns during each epoch. 
+
+* LSTM captures long term word dependencies and remembers full context irrespective of the length of the sequence. This overcones some drawbacks of the CNN before.
+* Most important layer in LSTM is the Long Short-Term Memory layer (RNN variant): It reads the embedded sequence word-by-word, keeping track of context through hidden states. Captures order and long-term dependencies in the text (important for meaning). The final output (after the last word) is passed on as a captured summary of the whole sequence.
+* Then the Dense Layer takes the output of previous layers and introduces non-lineaity with ReLU (Rectified Linear Unit) activation so the network can learn complex relationships.
+
+
+Following is the model training history and confusion matrix of the LSTM: ***<<<Update>>>***
+<img width="1200" height="500" alt="LSTM_history_accuracy_loss" src="https://github.com/user-attachments/assets/e0d6ed2f-0065-4590-a2be-3f60aa3052bb" />
+
+<img width="600" height="500" alt="LSTM_confustion_matrix" src="https://github.com/user-attachments/assets/911bbbbb-9841-42c0-972b-00fad2a3efe1" />
+
+
+#### Comparing the CNN and LSTM performance:
+| Model | Train Time (s) | Test Accuracy | Train Accuracy | Recall Score | F1 Score |
+|-------|----------------|---------------|----------------|--------------|----------|
+| CNN   | 124.65         | 0.998546      | 0.999608       | 0.998314     | 0.998434 |
+| LSTM  | 798.92         | 0.995077      | 0.998573       | 0.992775     | 0.994691 |
+
 
 
 
