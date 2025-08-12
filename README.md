@@ -177,6 +177,15 @@ From initial runs of the simple models, we can observe that:
 
 * Another inference we can make here is Random Forest being an Ensemble of decision trees, it performs better than simple Decision Trees. The wisdom of the crowd is better than individual.
 
+**Confusion Matrix and ROC plot for best performaing models:**
+
+1.Confusion Matrix and ROC plot for Random Forest model:
+  <img width="1200" height="600" alt="RandomForest_tfidf_conf_matrix_roc_plot" src="https://github.com/user-attachments/assets/34f197a6-b381-4105-8d46-8da8a69b31db" />
+
+2. Confusion Matrix and ROC plot for Decision Tree model:
+   <img width="1200" height="600" alt="Decision_Tree_tfidf_conf_matrix_roc_plot" src="https://github.com/user-attachments/assets/74f26e39-140f-41c6-9522-5891b686182d" />
+
+
 
 ### Training and comparing Simple ML models on the BERT embeddings for the news articles:
 
@@ -213,6 +222,46 @@ The much lower accuracies (~50%) with BERT embeddings compared to TF-IDF (~97% -
 * BERT sentence/document embeddings are dense and limited to 256 or 512 maximum length which loses the remaining text in the data. While TF-IDF generates vectors for whole data.
 * Mismatch between embeddings and simple ML models: BERT’s contextual embeddings shine when used with deep architectures or fine-tuned transformers which are out of the scope for this project, while Simple ML models struggle to extract useful decision boundaries from compressed semantic vectors.
 * Overfitting on TF-IDF due to feature sparsity: In our performance comparisons, Decision Tree and Random Forest achieve high training and test accuracies — possibly indicate the models are overfitting on TF-IDF data. We will see how the deep learning models work better despite lower accuracies overall.
+
+
+
+### Tuning the Simple ML models with GridSearch CV to find best hyperparameters:
+In line with our goal to find the best model that classifies the text articles as real or fake, let us improve on the simple models by tuning the Hyperparameters with GridSearchCV:
+
+Following are the performance metrics for running GridSearch Cross Validation to tune the models:
+| Model              | Train Time (s) | Test Accuracy | Train Accuracy | Recall Score | Best Score |
+|--------------------|----------------|---------------|----------------|--------------|------------|
+| LogisticRegression | 11.6489        | 0.9849        | 1.0000         | 0.9868       | 0.9854     |
+| DecisionTree       | 29.0133        | 0.9941        | 0.9968         | 0.9978       | 0.9950     |
+| KNN                | 254.9873       | 0.6694        | 1.0000         | 0.3290       | 0.6542     |
+| SVM                | 10882.7343     | 0.9739        | 0.9999         | 0.9692       | 0.9657     |
+| RandomForest       | 129.3957       | 0.9957        | 1.0000         | 0.9986       | 0.9948     |
+
+Compared to running standalone models, we see minor improvements in the accuracy andrecall for all the models after Hyperparameter tuning.
+
+**More inferences:**
+* Overall high performance for most models – Logistic Regression, Decision Tree, SVM, and Random Forest all achieved test accuracies above 97%, indicating strong predictive capability on the dataset.
+
+* Random Forest had best recall (0.9986) and also posted near-perfect train and test accuracies, showing strong sensitivity to positive cases but with a possible risk of overfitting given its perfect training accuracy.
+
+* Decision Tree achieved the highest test accuracy (0.9941) with very high recall (0.9978), performing nearly as well as Random Forest with less computational time.
+
+* SVM delivered strong performance (test accuracy 0.9739, recall 0.9692) but required by far the longest training time (over 10,000 seconds), making it less practical for large-scale or rapid retraining scenarios.
+
+* KNN underperformed significantly (test accuracy 0.6694, recall 0.3290) compared to other models, despite perfect training accuracy, suggesting severe overfitting and poor generalization.
+
+* Logistic Regression offered an excellent trade-off – very high test accuracy (0.9849), recall (0.9868), and extremely fast training time (≈12 seconds), making it a highly efficient baseline model.
+
+
+#### Confusion Matrices and ROC plots for tuned best models:
+1.Confusion Matrix and ROC plot for tuned Random Forest model:
+  <img width="1200" height="600" alt="Random Forest Classification Model with Tuned Hyperparameters_conf_matrix_roc_plot" src="https://github.com/user-attachments/assets/ac529c36-48de-4916-a73f-a77cf8c7902d" />
+
+
+2. Confusion Matrix and ROC plot for Decision Tree model:
+   <img width="1200" height="600" alt="Decision Tree Model with Tuned Hyperparameters_conf_matrix_roc_plot" src="https://github.com/user-attachments/assets/e4cf6630-a3b6-4690-8c06-0435f9302b26" />
+
+
 
 
 
