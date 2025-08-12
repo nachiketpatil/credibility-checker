@@ -63,7 +63,7 @@ Local setup:
 2. Install dependencies:
    `pip install -r requirement.txt`
 3. Open the Jupyter Notebook:
-   `jupyter notebook coupon_data_analysis.ipynb`
+   `jupyter notebook credibility-checker.ipynb`
    Run the cells to explore the analysis.
 
 ## License
@@ -448,9 +448,4 @@ Use article source credibility, publication date, author history, and even assoc
 | **LinkedIn** | [https://www.linkedin.com/in/nachikethiralalpatil/) |
 | **Project Repository** | [https://github.com/nachiketpatil/credibility-checker.git) |
 | **Primary Data Source** | [https://www.kaggle.com/datasets/clmentbisaillon/fake-and-real-news-dataset/data) |
-
-
-
-UC Berkeley Professional Certificate in Machine Learning and Artificial Intelligence
-Capstone Project - 2025
 
