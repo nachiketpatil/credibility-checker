@@ -152,8 +152,9 @@ The Naive Bayes model results are:
 <img width="1200" height="600" alt="NaiveBayes_tfidf_conf_matrix_roc_plot" src="https://github.com/user-attachments/assets/7a25fe3a-5729-494c-999c-62083ce576a2" />
 
 
-### Training and comparing Simple ML models on the TF-IDF vecors:
+### Training and Comparing Simple ML models on the TF-IDF vectors:
 As we are trying to determine whether the news article is real or fake, it means we are classifying the data into 2 categories. For this task, we can run simple ML models on the data and compare the performance of the models. Later we can tune hte models for optimal performance.
+
 The models that were run: Naive Bayes, Logistic Regression, Decision Trees, K-Nerarest Neighbors, Support Vector Machine and an ensemble Random Forest model.
 
 Following is the initial comparison table of training simple models on the news data:
