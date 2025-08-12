@@ -304,10 +304,11 @@ On top of performance metrics and confusion matrix showing hits and misses, best
 * Last layer is Sigmoid activation for binary classification → probability that text is real/fake.
 
 
-Following is the model training history and confusion matrix of the CNN: ***<<<Update>>>***
-<img width="1200" height="500" alt="CNN_history_accuracy_loss" src="https://github.com/user-attachments/assets/0ff4e4ed-c9da-4a97-927a-837cdd7cc747" />
+Following is the model training history and confusion matrix of the CNN:
+<img width="1200" height="500" alt="CNN_history_accuracy_loss" src="https://github.com/user-attachments/assets/ca37a488-bc49-4371-a530-8d3829677a27" />
 
-<img width="600" height="500" alt="CNN_confustion_matrix" src="https://github.com/user-attachments/assets/a7fec6a9-444a-4b23-a1cf-76ce7c108492" />
+<img width="600" height="500" alt="CNN_confusion_matrix" src="https://github.com/user-attachments/assets/fc351e41-e6d8-49e4-b671-70ee04c7f05b" />
+
 
 Here we ran the CNN for 10 epochs same for following RNN. We can observe that the train and test accuracies converge at **epoch 2**. After that the accuracy gain or reduction in loss is not significant.
 Also from the coinfusion matrix, we can observe that the false negatives and false positives are significantly reduced compared to the simple ML models like Random Forest classifier or decision tree model.
@@ -333,10 +334,11 @@ LSTM is one of the Recusrsive neural network models where the accuracy is improv
 * Then the Dense Layer takes the output of previous layers and introduces non-lineaity with ReLU (Rectified Linear Unit) activation so the network can learn complex relationships.
 
 
-Following is the model training history and confusion matrix of the LSTM: ***<<<Update>>>***
-<img width="1200" height="500" alt="LSTM_history_accuracy_loss" src="https://github.com/user-attachments/assets/e0d6ed2f-0065-4590-a2be-3f60aa3052bb" />
+Following is the model training history and confusion matrix of the LSTM:
+<img width="1200" height="500" alt="LSTM_history_accuracy_loss" src="https://github.com/user-attachments/assets/52a789b6-e7e7-43ab-9ce5-e6f6c606d530" />
 
-<img width="600" height="500" alt="LSTM_confustion_matrix" src="https://github.com/user-attachments/assets/911bbbbb-9841-42c0-972b-00fad2a3efe1" />
+<img width="600" height="500" alt="LSTM_confusion_matrix" src="https://github.com/user-attachments/assets/0157cfd8-fdec-475c-9f65-51f6a5427764" />
+
 
 
 #### Comparing the CNN and LSTM performance:
